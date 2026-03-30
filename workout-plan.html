@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2-Week Bro Split Training Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e8edf5;
+    --bg-card: #ffffff;
+    --blue: #1a6dff;
+    --blue-dark: #0f4fc7;
+    --navy: #0d1b2e;
+    --text: #1a2332;
+    --text-muted: #6b7a90;
+    --border: #d0d8e8;
+    --tag-border: #b0bccc;
+    --hiit: #ff5c38;
+    --green: #22c55e;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    padding: 48px 60px 32px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+
+  .header-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .header-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--blue);
+  }
+
+  .header h1 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: clamp(64px, 8vw, 100px);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+  }
+
+  .header h1 .line1 { color: var(--navy); }
+  .header h1 .line2 { color: var(--blue); }
+
+  .meta-pills {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .pill {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 99px;
+    border: 1.5px solid var(--tag-border);
+    color: var(--text-muted);
+    background: transparent;
+  }
+
+  .pill.active-pill {
+    border-color: var(--blue);
+    color: var(--blue);
+    background: rgba(26,109,255,0.07);
+  }
+
+  /* ─── SESSION STRUCTURE ─── */
+  .session-bar {
+    max-width: 1300px;
+    margin: 0 auto 32px;
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .session-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .session-step {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .session-step::after {
+    content: '→';
+    color: var(--border);
+    font-size: 12px;
+  }
+  .session-step:last-child::after { display: none; }
+
+  /* ─── DAY NAV ─── */
+  .day-nav {
+    max-width: 1300px;
+    margin: 0 auto 40px;
+    padding: 0 60px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .day-btn {
+    width: 72px;
+    height: 80px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: var(--bg-card);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    transition: all 0.18s ease;
+    font-family: 'Barlow Condensed', sans-serif;
+  }
+
+  .day-btn:hover {
+    border-color: var(--blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(26,109,255,0.15);
+  }
+
+  .day-btn.active {
+    background: var(--blue);
+    border-color: var(--blue);
+    color: white;
+    box-shadow: 0 4px 20px rgba(26,109,255,0.35);
+  }
+
+  .day-btn .num {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .day-btn .lbl {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: inherit;
+    opacity: 0.7;
+  }
+
+  .day-btn.active .lbl { opacity: 0.85; }
+  .day-btn:not(.active) .num { color: var(--text); }
+  .day-btn:not(.active) .lbl { color: var(--text-muted); }
+
+  /* ─── MAIN CONTENT ─── */
+  .content {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 60px 80px;
+  }
+
+  /* Day panel */
+  .day-panel { display: none; }
+  .day-panel.visible { display: block; animation: fadeIn 0.25s ease; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Day heading */
+  .day-heading {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-number-big {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 100px;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--border);
+    letter-spacing: -0.02em;
+    user-select: none;
+  }
+
+  .day-title-block {
+    padding-bottom: 8px;
+  }
+
+  .day-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    color: var(--blue);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .day-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: 0.01em;
+  }
+
+  .day-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .day-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 6px;
+    border: 1.5px solid var(--tag-border);
+    color: var(--text-muted);
+  }
+
+  .day-tag.highlight {
+    border-color: var(--blue);
+    color: var(--blue);
+  }
+
+  .day-tag.hiit-tag {
+    border-color: var(--hiit);
+    color: var(--hiit);
+  }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ─── EXERCISE LIST ─── */
+  .exercise-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .exercise-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    cursor: default;
+    position: relative;
+  }
+
+  .exercise-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+  }
+
+  .ex-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-muted);
+    min-width: 20px;
+    opacity: 0.5;
+  }
+
+  .ex-info {
+    flex: 1;
+  }
+
+  .ex-name {
+    font-family: 'Barlow', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+  }
+
+  .ex-detail {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    margin-top: 2px;
+  }
+
+  .ex-check {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    flex-shrink: 0;
+    color: transparent;
+    font-size: 13px;
+  }
+
+  .ex-check:hover {
+    border-color: var(--blue);
+    background: rgba(26,109,255,0.06);
+  }
+
+  .ex-check.done {
+    border-color: var(--green);
+    background: rgba(34,197,94,0.12);
+    color: var(--green);
+  }
+
+  /* ─── CARDIO CARD ─── */
+  .cardio-card {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 20px 24px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .cardio-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .cardio-stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .cardio-stat-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+  }
+
+  .cardio-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+
+  /* ─── HIIT CARD ─── */
+  .hiit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .hiit-item {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: var(--card-shadow);
+    border-left: 3px solid var(--hiit);
+  }
+
+  .hiit-item-name {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .hiit-item-detail {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    color: var(--hiit);
+    font-weight: 700;
+    margin-top: 3px;
+    letter-spacing: 0.04em;
+  }
+
+  .hiit-info {
+    background: rgba(255,92,56,0.07);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--hiit);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* Interval note */
+  .interval-note {
+    background: var(--bg-card);
+    border-radius: 12px;
+    padding: 16px 20px;
+    box-shadow: var(--card-shadow);
+    font-family: 'Barlow', sans-serif;
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .interval-note strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+
+  /* ─── REST DAY ─── */
+  .rest-card {
+    background: var(--bg-card);
+    border-radius: 16px;
+    padding: 48px 32px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+  }
+
+  .rest-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+
+  .rest-card h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .rest-card p {
+    color: var(--text-muted);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .header, .session-bar, .day-nav, .content { padding-left: 20px; padding-right: 20px; }
+    .header { padding-top: 32px; }
+    .day-number-big { font-size: 64px; }
+    .day-title { font-size: 30px; }
+    .day-btn { width: 58px; height: 66px; }
+    .day-btn .num { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">FAT LOSS + MUSCLE RETENTION + CONDITIONING</div>
+  <h1>
+    <div class="line1">2-WEEK</div>
+    <div class="line2">BRO SPLIT</div>
+  </h1>
+  <div class="meta-pills">
+    <span class="pill active-pill">6 TRAINING DAYS</span>
+    <span class="pill">1 RECOVERY DAY</span>
+    <span class="pill">STRENGTH + CARDIO</span>
+    <span class="pill">REPEATABLE 2 WEEKS</span>
+  </div>
+</div>
+
+<div class="session-bar">
+  <span class="session-label">Daily Session:</span>
+  <span class="session-step">Meditation</span>
+  <span class="session-step">Pilates</span>
+  <span class="session-step">Strength</span>
+  <span class="session-step">Cardio</span>
+  <span class="session-step">Evening Walk/Run</span>
+</div>
+
+<div class="day-nav">
+  <button class="day-btn active" onclick="showDay(1, this)">
+    <span class="num">1</span><span class="lbl">Chest</span>
+  </button>
+  <button class="day-btn" onclick="showDay(2, this)">
+    <span class="num">2</span><span class="lbl">Back</span>
+  </button>
+  <button class="day-btn" onclick="showDay(3, this)">
+    <span class="num">3</span><span class="lbl">Shoulders</span>
+  </button>
+  <button class="day-btn" onclick="showDay(4, this)">
+    <span class="num">4</span><span class="lbl">Legs</span>
+  </button>
+  <button class="day-btn" onclick="showDay(5, this)">
+    <span class="num">5</span><span class="lbl">Arms</span>
+  </button>
+  <button class="day-btn" onclick="showDay(6, this)">
+    <span class="num">6</span><span class="lbl">Cond.</span>
+  </button>
+  <button class="day-btn" onclick="showDay(7, this)">
+    <span class="num">7</span><span class="lbl">Rest</span>
+  </button>
+</div>
+
+<div class="content">
+
+  <!-- DAY 1 -->
+  <div class="day-panel visible" id="day-1">
+    <div class="day-heading">
+      <div class="day-number-big">01</div>
+      <div class="day-title-block">
+        <div class="day-label">Training Day</div>
+        <div class="day-title">Chest + Incline Walk</div>
+        <div class="day-tags">
+          <span class="day-tag">CHEST</span>
+          <span class="day-tag">PUSH</span>
+          <span class="day-tag highlight">CARDIO FINISH</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Strength Work</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Barbell Bench Press</div><div class="ex-detail">4 × 6–8 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Incline Dumbbell Press</div><div class="ex-detail">4 × 8–10 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Cable Chest Fly</div><div class="ex-detail">3 × 12–15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">4</span><div class="ex-info"><div class="ex-name">Chest Dips</div><div class="ex-detail">3 × 10 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">5</span><div class="ex-info"><div class="ex-name">Pushups (slow tempo)</div><div class="ex-detail">3 × max reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Cardio Finish</div>
+      <div class="cardio-card">
+        <div class="cardio-stat"><div class="cardio-stat-label">Type</div><div class="cardio-stat-value" style="font-size:18px;padding-top:4px">Treadmill Incline Walk</div></div>
+        <div class="cardio-divider"></div>
+        <div class="cardio-stat"><div class="cardio-stat-label">Duration</div><div class="cardio-stat-value">20 <span style="font-size:14px;font-weight:600">min</span></div></div>
+        <div class="cardio-divider"></div>
+        <div class="cardio-stat"><div class="cardio-stat-label">Incline</div><div class="cardio-stat-value">8–12 <span style="font-size:14px;font-weight:600">%</span></div></div>
+        <div class="cardio-divider"></div>
+        <div class="cardio-stat"><div class="cardio-stat-label">Speed</div><div class="cardio-stat-value">4.5–5 <span style="font-size:14px;font-weight:600">km/h</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-panel" id="day-2">
+    <div class="day-heading">
+      <div class="day-number-big">02</div>
+      <div class="day-title-block">
+        <div class="day-label">Training Day</div>
+        <div class="day-title">Back + Running</div>
+        <div class="day-tags">
+          <span class="day-tag">BACK</span>
+          <span class="day-tag">PULL</span>
+          <span class="day-tag highlight">INTERVAL RUN</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Strength Work</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Pullups</div><div class="ex-detail">4 × max reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Bent-Over Barbell Row</div><div class="ex-detail">4 × 6–8 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Seated Cable Row</div><div class="ex-detail">3 × 10–12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">4</span><div class="ex-info"><div class="ex-name">Lat Pulldown</div><div class="ex-detail">3 × 10–12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">5</span><div class="ex-info"><div class="ex-name">Straight Arm Pulldown</div><div class="ex-detail">3 × 12–15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">6</span><div class="ex-info"><div class="ex-name">Face Pulls</div><div class="ex-detail">3 × 15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Running — Interval Training</div>
+      <div class="interval-note">
+        <strong>Structure:</strong> 5-minute warm-up jog → alternating sprint / active recovery intervals → cool down.<br>
+        <strong>Total time:</strong> ≈ 20 minutes
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-panel" id="day-3">
+    <div class="day-heading">
+      <div class="day-number-big">03</div>
+      <div class="day-title-block">
+        <div class="day-label">Training Day</div>
+        <div class="day-title">Shoulders + Core</div>
+        <div class="day-tags">
+          <span class="day-tag">SHOULDERS</span>
+          <span class="day-tag">DELTS</span>
+          <span class="day-tag highlight">CORE FINISHER</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Strength Work</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Overhead Barbell Press</div><div class="ex-detail">4 × 6–8 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Dumbbell Lateral Raises</div><div class="ex-detail">4 × 12–15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Rear Delt Fly</div><div class="ex-detail">3 × 12–15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">4</span><div class="ex-info"><div class="ex-name">Arnold Press</div><div class="ex-detail">3 × 10 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">5</span><div class="ex-info"><div class="ex-name">Cable Lateral Raise</div><div class="ex-detail">3 × 15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Core Finisher</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Hanging Leg Raises</div><div class="ex-detail">3 × 12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Core Shoulder Taps</div><div class="ex-detail">3 × 12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Russian Twists</div><div class="ex-detail">3 × 15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-panel" id="day-4">
+    <div class="day-heading">
+      <div class="day-number-big">04</div>
+      <div class="day-title-block">
+        <div class="day-label">Training Day</div>
+        <div class="day-title">Legs + Core</div>
+        <div class="day-tags">
+          <span class="day-tag">QUADS</span>
+          <span class="day-tag">HAMSTRINGS</span>
+          <span class="day-tag">CALVES</span>
+          <span class="day-tag highlight">LOWER BODY</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Strength Work</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Back Squat</div><div class="ex-detail">4 × 6–8 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Romanian Deadlift</div><div class="ex-detail">4 × 8 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Leg Press</div><div class="ex-detail">3 × 10 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">4</span><div class="ex-info"><div class="ex-name">Walking Lunges</div><div class="ex-detail">3 × 12 reps each leg</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">5</span><div class="ex-info"><div class="ex-name">Hamstring Curl</div><div class="ex-detail">3 × 12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">6</span><div class="ex-info"><div class="ex-name">Standing Calf Raises</div><div class="ex-detail">4 × 15 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 -->
+  <div class="day-panel" id="day-5">
+    <div class="day-heading">
+      <div class="day-number-big">05</div>
+      <div class="day-title-block">
+        <div class="day-label">Training Day</div>
+        <div class="day-title">Arms + HIIT</div>
+        <div class="day-tags">
+          <span class="day-tag">BICEPS</span>
+          <span class="day-tag">TRICEPS</span>
+          <span class="day-tag hiit-tag">HIIT CIRCUIT</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Biceps</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Barbell Curl</div><div class="ex-detail">4 × 8–10 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Incline Dumbbell Curl</div><div class="ex-detail">3 × 10 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Hammer Curl</div><div class="ex-detail">3 × 12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Triceps</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Close Grip Bench Press</div><div class="ex-detail">4 × 8 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Rope Pushdown</div><div class="ex-detail">3 × 12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Overhead Dumbbell Extension</div><div class="ex-detail">3 × 10–12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">HIIT Circuit</div>
+      <div class="hiit-grid">
+        <div class="hiit-item"><div class="hiit-item-name">Burpees</div><div class="hiit-item-detail">30 sec</div></div>
+        <div class="hiit-item"><div class="hiit-item-name">Jump Squats</div><div class="hiit-item-detail">30 sec</div></div>
+        <div class="hiit-item"><div class="hiit-item-name">Mountain Climbers</div><div class="hiit-item-detail">30 sec</div></div>
+        <div class="hiit-item"><div class="hiit-item-name">High Knees</div><div class="hiit-item-detail">30 sec</div></div>
+        <div class="hiit-item"><div class="hiit-item-name">Push-Ups</div><div class="hiit-item-detail">30 sec</div></div>
+        <div class="hiit-item"><div class="hiit-item-name">KB Swings</div><div class="hiit-item-detail">20 reps</div></div>
+      </div>
+      <div class="hiit-info">Rest 2 min between sets · Repeat for 4 Sets Total</div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-panel" id="day-6">
+    <div class="day-heading">
+      <div class="day-number-big">06</div>
+      <div class="day-title-block">
+        <div class="day-label">Training Day</div>
+        <div class="day-title">Conditioning + Stability</div>
+        <div class="day-tags">
+          <span class="day-tag">STABILITY</span>
+          <span class="day-tag">CROSSFIT</span>
+          <span class="day-tag highlight">FUNCTIONAL</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Stability Training</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Copenhagen Plank</div><div class="ex-detail">2 × 20–30 sec/side</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Single Leg Hold</div><div class="ex-detail">2 × 30–40 sec/leg</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Half-Kneeling Overhead Press</div><div class="ex-detail">2 × 10/arm</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">4</span><div class="ex-info"><div class="ex-name">Bird Dogs</div><div class="ex-detail">2 × 8/side</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">5</span><div class="ex-info"><div class="ex-name">Dead Bug</div><div class="ex-detail">2 × 8–10/side</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">6</span><div class="ex-info"><div class="ex-name">Single-Arm Farmer Carry</div><div class="ex-detail">2 × 20–30 m/arm</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">CrossFit Conditioning Circuit</div>
+      <div class="exercise-list">
+        <div class="exercise-card"><span class="ex-number">1</span><div class="ex-info"><div class="ex-name">Kettlebell Swings</div><div class="ex-detail">× 20 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">2</span><div class="ex-info"><div class="ex-name">Sled Push</div><div class="ex-detail">× 50 m</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">3</span><div class="ex-info"><div class="ex-name">Box Jumps</div><div class="ex-detail">× 12 reps</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">4</span><div class="ex-info"><div class="ex-name">Battle Rope</div><div class="ex-detail">× 60 sec</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+        <div class="exercise-card"><span class="ex-number">5</span><div class="ex-info"><div class="ex-name">Farmer Carry</div><div class="ex-detail">× 50 m</div></div><div class="ex-check" onclick="toggleCheck(this)">✓</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 -->
+  <div class="day-panel" id="day-7">
+    <div class="day-heading">
+      <div class="day-number-big">07</div>
+      <div class="day-title-block">
+        <div class="day-label">Recovery Day</div>
+        <div class="day-title">Rest + Recover</div>
+        <div class="day-tags">
+          <span class="day-tag">FULL REST</span>
+          <span class="day-tag">MOBILITY</span>
+        </div>
+      </div>
+    </div>
+    <div class="rest-card">
+      <div class="rest-icon">🧘</div>
+      <h3>Full Rest Day</h3>
+      <p>Focus on recovery — gentle mobility work, stretching, and hydration. Let your muscles repair and grow. Meditation + light evening walk encouraged.</p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showDay(num, btn) {
+    document.querySelectorAll('.day-panel').forEach(p => p.classList.remove('visible'));
+    document.querySelectorAll('.day-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('day-' + num).classList.add('visible');
+    btn.classList.add('active');
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+  }
+</script>
+</body>
+</html>
